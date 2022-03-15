@@ -1,0 +1,650 @@
+[
+    {
+        "id": 1,
+        "name": "Adjudication",
+        "description": "Determine if an application requiring adjudication should be accepted or declined given the available application data and supporting documents.",
+        "knowledgeSources": [
+            {
+                "id": 2,
+                "name": "Credit officer experience",
+                "description": "The collected wisdom of the credit officers as collected in their best practice wiki.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [],
+        "inputData": [
+            {
+                "id": 5,
+                "name": "Supporting documents",
+                "description": "Documents associated with a loan that are not processed electronically but are available for manual adjudication."
+            },
+            {
+                "id": 2,
+                "name": "Bureau data",
+                "description": "External credit score and bankruptcy information provided by a bureau."
+            },
+            {
+                "id": 1,
+                "name": "Applicant data",
+                "description": "Information about the applicant including personal information, marital status and household income/expenses."
+            }
+        ],
+        "outputAsInputData": [
+            {
+                "id": 10,
+                "name": "Routing",
+                "description": "How this should this applicant be routed given all available data? Allowed Answers: A value from the explicit list 'Decline', 'Refer for Adjudication', 'Accept without Review'"
+            }
+        ],
+        "outputData": [
+            {
+                "id": 1,
+                "name": "Adjudication",
+                "description": "Should this application that has been referred for adjudication be accepted? Allowed Answers: Yes/No"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Application risk score",
+        "description": "The Application Risk Score decision logic invokes the Application risk score model business knowledge model, passing Applicant data.Age as the Age parameter, Applicant data.MaritalStatus as the Marital Status parameter and Applicant data.EmploymentStatus as the Employment Status parameter.",
+        "knowledgeSources": [
+            {
+                "id": 3,
+                "name": "Credit risk analytics",
+                "description": "Credit risk scorecard analysis to determine the relevant factors for application risk scoring",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [
+            {
+                "id": 8,
+                "name": "Application risk score model",
+                "description": "The Application risk score model decision logic defines a complete, no-order multiple-hit table with aggregation, deriving Application risk score from Age, Marital Status and Employment Status, as the sum of the Partial scores of all matching rows (this is therefore a predictive scorecard represented as a decision table).",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "inputData": [
+            {
+                "id": 1,
+                "name": "Applicant data",
+                "description": "Information about the applicant including personal information, marital status and household income/expenses."
+            }
+        ],
+        "outputAsInputData": [],
+        "outputData": [
+            {
+                "id": 2,
+                "name": "Application risk score",
+                "description": "What is the risk score for this applicant? Allowed Answers: A number greater than 70 and less than 150"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Bureau call type",
+        "description": "The Bureau call type decision logic invokes the Bureau call type table, passing the output of the Pre-bureau risk category decision as the Pre-Bureau Risk Category parameter.",
+        "knowledgeSources": [
+            {
+                "id": 5,
+                "name": "Risk management strategy",
+                "description": "Overall risk management approach for the financial institution including its approach to application risk, credit contingencies and credit risk scoring.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [
+            {
+                "id": 3,
+                "name": "Bureau call type table",
+                "description": "The Bureau call type table decision logic defines a complete, unique-hit decision table deriving Bureau Call Type from Pre-Bureau Risk Category.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "inputData": [],
+        "outputAsInputData": [
+            {
+                "id": 7,
+                "name": "Pre-bureau risk category",
+                "description": "Which risk category is most appropriate for this applicant given only their application data? Allowed Answers: Value from explicit list 'Decline', 'High Risk', 'Medium Risk', 'Low Risk', 'Very Low Risk'"
+            }
+        ],
+        "outputData": [
+            {
+                "id": 3,
+                "name": "Bureau call type",
+                "description": "How much data should be requested from the credit bureau for this application? Allowed Answers: A value from the explicit list 'Full', 'Mini', 'None'"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Eligibility",
+        "description": "The Eligibility decision logic invokes the Eligibility rules business knowledge model, passing Applicant data.Age as the Age parameter, the output of the Pre-bureau risk category decision as the Pre-Bureau Risk Category parameter, and the output of the Pre-bureau affordability decision as the Pre-Bureau Affordability parameter.",
+        "knowledgeSources": [
+            {
+                "id": 4,
+                "name": "Product specification",
+                "description": "Definitions of the products, their cost structure and eligibility criteria.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [
+            {
+                "id": 1,
+                "name": "Eligibility rules",
+                "description": "The Eligibility rules decision logic defines a complete, priority-ordered single hit decision table deriving Eligibility from Pre-Bureau Risk Category, Pre-Bureau Affordability and Age.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "inputData": [
+            {
+                "id": 1,
+                "name": "Applicant data",
+                "description": "Information about the applicant including personal information, marital status and household income/expenses."
+            }
+        ],
+        "outputAsInputData": [
+            {
+                "id": 7,
+                "name": "Pre-bureau risk category",
+                "description": "Which risk category is most appropriate for this applicant given only their application data? Allowed Answers: Value from explicit list 'Decline', 'High Risk', 'Medium Risk', 'Low Risk', 'Very Low Risk'"
+            },
+            {
+                "id": 5,
+                "name": "Pre-bureau affordability",
+                "description": "Can the applicant afford the loan they applied for given only their application data? Allowed Answers: Yes/No"
+            }
+        ],
+        "outputData": [
+            {
+                "id": 4,
+                "name": "Eligibility",
+                "description": "Does this applicant appear eligible for the loan they applied for given only their application data? Allowed Answers: Value from the explicit list 'Eligible', 'Not Eligible'"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Pre-bureau affordability",
+        "description": "The Pre-bureau affordability decision logic invokes the Affordability calculation business knowledge model, passing Applicant data.Monthly.Income as the Monthly Income parameter, Applicant data.Monthly.Repayments as the Monthly Repayments parameter, Applicant data.Monthly.Expenses as the Monthly Expenses parameter, the output of of the Pre-bureau risk category decision as the Risk Category parameter, and the output of the Required monthly installment decision as the Required Monthly Installment parameter.",
+        "knowledgeSources": [
+            {
+                "id": 5,
+                "name": "Risk management strategy",
+                "description": "Overall risk management approach for the financial institution including its approach to application risk, credit contingencies and credit risk scoring.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            },
+            {
+                "id": 1,
+                "name": "Affordability spreadsheet",
+                "description": "Internal spreadsheet showing the relationship of income, payments, expenses, risk and affordability.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [
+            {
+                "id": 4,
+                "name": "Credit contingency factor table",
+                "description": "The Credit contingency factor table decision logic defines a complete, unique-hit decision table deriving Credit contingency factor from Risk Category.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            },
+            {
+                "id": 5,
+                "name": "Affordability calculation",
+                "description": "The Affordability calculation decision logic defines a boxed function deriving Affordability from Monthly Income, Monthly Repayments, Monthly Expenses and Required Monthly Installment. One step in this calculation derives Credit contingency factor by invoking the Credit contingency factor table business.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "inputData": [
+            {
+                "id": 1,
+                "name": "Applicant data",
+                "description": "Information about the applicant including personal information, marital status and household income/expenses."
+            }
+        ],
+        "outputAsInputData": [
+            {
+                "id": 7,
+                "name": "Pre-bureau risk category",
+                "description": "Which risk category is most appropriate for this applicant given only their application data? Allowed Answers: Value from explicit list 'Decline', 'High Risk', 'Medium Risk', 'Low Risk', 'Very Low Risk'"
+            },
+            {
+                "id": 9,
+                "name": "Required monthly installment",
+                "description": "What is the minimum monthly installment payment required for this loan product? Allowed Answers: A dollar amount greater than zero"
+            }
+        ],
+        "outputData": [
+            {
+                "id": 5,
+                "name": "Pre-bureau affordability",
+                "description": "Can the applicant afford the loan they applied for given only their application data? Allowed Answers: Yes/No"
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Post-bureau affordability",
+        "description": "The Post-bureau affordability decision logic invokes the Affordability calculation business knowledge model, passing Applicant data.Monthly.Income as the Monthly Income parameter, Applicant data.Monthly.Repayments as the Monthly Repayments parameter, Applicant data.Monthly.Expenses as the Monthly Expenses parameter, the output of the Post-bureau risk category decision as the Risk Category parameter, and the output of the Required monthly installment decision as the Required Monthly Installment parameter.",
+        "knowledgeSources": [
+            {
+                "id": 1,
+                "name": "Affordability spreadsheet",
+                "description": "Internal spreadsheet showing the relationship of income, payments, expenses, risk and affordability.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            },
+            {
+                "id": 5,
+                "name": "Risk management strategy",
+                "description": "Overall risk management approach for the financial institution including its approach to application risk, credit contingencies and credit risk scoring.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [
+            {
+                "id": 5,
+                "name": "Affordability calculation",
+                "description": "The Affordability calculation decision logic defines a boxed function deriving Affordability from Monthly Income, Monthly Repayments, Monthly Expenses and Required Monthly Installment. One step in this calculation derives Credit contingency factor by invoking the Credit contingency factor table business.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            },
+            {
+                "id": 4,
+                "name": "Credit contingency factor table",
+                "description": "The Credit contingency factor table decision logic defines a complete, unique-hit decision table deriving Credit contingency factor from Risk Category.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "inputData": [
+            {
+                "id": 1,
+                "name": "Applicant data",
+                "description": "Information about the applicant including personal information, marital status and household income/expenses."
+            }
+        ],
+        "outputAsInputData": [
+            {
+                "id": 8,
+                "name": "Post-bureau risk category",
+                "description": "Which risk category is most appropriate for this applicant given all available data? Allowed Answers: A value from the explicit list 'Decline', 'High Risk', 'Medium Risk', 'Low Risk', 'Very Low Risk'"
+            },
+            {
+                "id": 9,
+                "name": "Required monthly installment",
+                "description": "What is the minimum monthly installment payment required for this loan product? Allowed Answers: A dollar amount greater than zero"
+            }
+        ],
+        "outputData": [
+            {
+                "id": 6,
+                "name": "Post-bureau affordability",
+                "description": "Can the applicant afford the loan they applied for given all available data? Allowed Answers: Yes/No"
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Pre-bureau risk category",
+        "description": "The Pre-Bureau Risk Category decision logic invokes the Pre-bureau risk category table business knowledge model, passing Applicant data.ExistingCustomer as the Existing Customer parameter and the output of the Application risk score decision as the Application Risk Score parameter.",
+        "knowledgeSources": [
+            {
+                "id": 5,
+                "name": "Risk management strategy",
+                "description": "Overall risk management approach for the financial institution including its approach to application risk, credit contingencies and credit risk scoring.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [
+            {
+                "id": 6,
+                "name": "Pre-bureau risk category table",
+                "description": "The Pre-bureau risk category table decision logic defines a complete, unique-hit decision table deriving Pre- bureau risk category from Existing Customer and Application Risk Score.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "inputData": [
+            {
+                "id": 1,
+                "name": "Applicant data",
+                "description": "Information about the applicant including personal information, marital status and household income/expenses."
+            }
+        ],
+        "outputAsInputData": [
+            {
+                "id": 2,
+                "name": "Application risk score",
+                "description": "What is the risk score for this applicant? Allowed Answers: A number greater than 70 and less than 150"
+            }
+        ],
+        "outputData": [
+            {
+                "id": 7,
+                "name": "Pre-bureau risk category",
+                "description": "Which risk category is most appropriate for this applicant given only their application data? Allowed Answers: Value from explicit list 'Decline', 'High Risk', 'Medium Risk', 'Low Risk', 'Very Low Risk'"
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "name": "Post-bureau risk category",
+        "description": "The Post-bureau risk category decision logic invokes the Post-bureau risk category business knowledge model, passing Applicant data.ExistingCustomer as the Existing Customer parameter, Bureau data.CreditScore as the Credit Score parameter, and the output of the Application risk score decision as the Application Risk Score parameter. Note that if Bureau data is null (due to the THROUGH strategy bypassing the Collect bureau data task) the Credit Score parameter will be null.",
+        "knowledgeSources": [
+            {
+                "id": 5,
+                "name": "Risk management strategy",
+                "description": "Overall risk management approach for the financial institution including its approach to application risk, credit contingencies and credit risk scoring.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [
+            {
+                "id": 7,
+                "name": "Post-bureau risk category table",
+                "description": "The Post-bureau risk category table decision logic defines a complete, unique-hit decision table deriving Post-Bureau Risk Category from Existing Customer, Application Risk Score and Credit Score.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "inputData": [
+            {
+                "id": 2,
+                "name": "Bureau data",
+                "description": "External credit score and bankruptcy information provided by a bureau."
+            },
+            {
+                "id": 1,
+                "name": "Applicant data",
+                "description": "Information about the applicant including personal information, marital status and household income/expenses."
+            }
+        ],
+        "outputAsInputData": [
+            {
+                "id": 2,
+                "name": "Application risk score",
+                "description": "What is the risk score for this applicant? Allowed Answers: A number greater than 70 and less than 150"
+            }
+        ],
+        "outputData": [
+            {
+                "id": 8,
+                "name": "Post-bureau risk category",
+                "description": "Which risk category is most appropriate for this applicant given all available data? Allowed Answers: A value from the explicit list 'Decline', 'High Risk', 'Medium Risk', 'Low Risk', 'Very Low Risk'"
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "name": "Required monthly installment",
+        "description": "The Required monthly installment decision logic invokes the Installment calculation business knowledge model, passing Requested product.ProductType as the Product Type parameter, Requested product.Rate as the Rate parameter, Requested product.Term as the Term parameter, and Requested product.Amount as the Amount parameter.",
+        "knowledgeSources": [],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [
+            {
+                "id": 9,
+                "name": "Installment calculation",
+                "description": "The Installment calculation decision logic defines a boxed function deriving monthly installment from Product Type, Rate, Term and Amount.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            },
+            {
+                "id": 10,
+                "name": "Financial.PMT",
+                "description": "Standard calculation of monthly installment from Rate, Term and Amount.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "inputData": [
+            {
+                "id": 4,
+                "name": "Requested product",
+                "description": "Details of the loan the applicant has applied for."
+            }
+        ],
+        "outputAsInputData": [],
+        "outputData": [
+            {
+                "id": 9,
+                "name": "Required monthly installment",
+                "description": "What is the minimum monthly installment payment required for this loan product? Allowed Answers: A dollar amount greater than zero"
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "name": "Routing",
+        "description": "The Routing decision logic invokes the Routing rules business knowledge model, passing Bureau data. Bankrupt as the Bankrupt parameter, Bureau data. Credit Score as the Credit Score parameter, the output of the Post- bureau risk category decision as the Post-Bureau Risk Category parameter, and the output of the Post-bureau affordability decision as the Post-Bureau Affordability parameter. Note that if Bureau data is null (due to the THROUGH strategy bypassing the Collect bureau data task) the Bankrupt and Credit Score parameters will be null.",
+        "knowledgeSources": [
+            {
+                "id": 4,
+                "name": "Product specification",
+                "description": "Definitions of the products, their cost structure and eligibility criteria.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [
+            {
+                "id": 2,
+                "name": "Routing rules",
+                "description": "The Routing Rules decision logic defines a complete, priority-ordered single hit decision table deriving Routing from Post-Bureau Risk Category, Post-Bureau Affordability, Bankrupt and Credit Score.",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "inputData": [
+            {
+                "id": 2,
+                "name": "Bureau data",
+                "description": "External credit score and bankruptcy information provided by a bureau."
+            }
+        ],
+        "outputAsInputData": [
+            {
+                "id": 8,
+                "name": "Post-bureau risk category",
+                "description": "Which risk category is most appropriate for this applicant given all available data? Allowed Answers: A value from the explicit list 'Decline', 'High Risk', 'Medium Risk', 'Low Risk', 'Very Low Risk'"
+            },
+            {
+                "id": 6,
+                "name": "Post-bureau affordability",
+                "description": "Can the applicant afford the loan they applied for given all available data? Allowed Answers: Yes/No"
+            }
+        ],
+        "outputData": [
+            {
+                "id": 10,
+                "name": "Routing",
+                "description": "How this should this applicant be routed given all available data? Allowed Answers: A value from the explicit list 'Decline', 'Refer for Adjudication', 'Accept without Review'"
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "name": "Strategy",
+        "description": "The Strategy decision logic defines a complete, unique-hit decision table deriving Strategy from Eligibility and Bureau call type.",
+        "knowledgeSources": [],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [],
+        "inputData": [],
+        "outputAsInputData": [
+            {
+                "id": 3,
+                "name": "Bureau call type",
+                "description": "How much data should be requested from the credit bureau for this application? Allowed Answers: A value from the explicit list 'Full', 'Mini', 'None'"
+            },
+            {
+                "id": 4,
+                "name": "Eligibility",
+                "description": "Does this applicant appear eligible for the loan they applied for given only their application data? Allowed Answers: Value from the explicit list 'Eligible', 'Not Eligible'"
+            }
+        ],
+        "outputData": [
+            {
+                "id": 11,
+                "name": "Strategy",
+                "description": "What is the appropriate handling strategy for this application? Allowed Answers: A value from the explicit list 'Decline','Bureau','Through'"
+            }
+        ]
+    },
+    {
+        "id": 12,
+        "name": "Qualification",
+        "description": "",
+        "knowledgeSources": [],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [
+            {
+                "id": 12,
+                "name": "Qualification",
+                "description": "",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            },
+            {
+                "id": 13,
+                "name": "Qualification Parameters",
+                "description": "",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            },
+            {
+                "id": 14,
+                "name": "Min Credit Score",
+                "description": "",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "inputData": [
+            {
+                "id": 10,
+                "name": "Lender Ratings",
+                "description": "a structure of type tLenderRatings"
+            },
+            {
+                "id": 9,
+                "name": "Borrower",
+                "description": "a structure of type tBorrower"
+            },
+            {
+                "id": 6,
+                "name": "Credit Score",
+                "description": "a number from 300 to 850 inclusive"
+            },
+            {
+                "id": 8,
+                "name": "Property",
+                "description": "a structure of type tProperty"
+            },
+            {
+                "id": 11,
+                "name": "Loan Products",
+                "description": ""
+            }
+        ],
+        "outputAsInputData": [
+            {
+                "id": 14,
+                "name": "Loan info table",
+                "description": ""
+            }
+        ],
+        "outputData": [
+            {
+                "id": 12,
+                "name": "Qualification",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "name": "Recommended Loan Products",
+        "description": "",
+        "knowledgeSources": [],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [
+            {
+                "id": 11,
+                "name": "Format Row",
+                "description": "",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "inputData": [],
+        "outputAsInputData": [
+            {
+                "id": 12,
+                "name": "Qualification",
+                "description": ""
+            }
+        ],
+        "outputData": [
+            {
+                "id": 13,
+                "name": "Recommended Loan Products",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 14,
+        "name": "Loan info table",
+        "description": "",
+        "knowledgeSources": [],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [
+            {
+                "id": 15,
+                "name": "Loan Info Services",
+                "description": "",
+                "url": "https://www.omg.org/spec/DMN/1.3/PDF"
+            }
+        ],
+        "inputData": [
+            {
+                "id": 6,
+                "name": "Credit Score",
+                "description": "a number from 300 to 850 inclusive"
+            },
+            {
+                "id": 8,
+                "name": "Property",
+                "description": "a structure of type tProperty"
+            },
+            {
+                "id": 11,
+                "name": "Loan Products",
+                "description": ""
+            },
+            {
+                "id": 7,
+                "name": "Down Payment",
+                "description": "a number"
+            }
+        ],
+        "outputAsInputData": [],
+        "outputData": [
+            {
+                "id": 14,
+                "name": "Loan info table",
+                "description": ""
+            }
+        ]
+    }
+]

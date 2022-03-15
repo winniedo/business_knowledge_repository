@@ -1,0 +1,466 @@
+[
+    {
+        "id": 19,
+        "name": "Adjudication",
+        "description": "Determine if an application requiring adjudication should be accepted or declined given the available application data and supporting documents.",
+        "knowledgeSources": [],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [],
+        "inputData": [
+            {
+                "id": 17,
+                "name": "Supporting documents",
+                "description": "Documents associated with a loan that are not processed electronically but are available for manual adjudication."
+            },
+            {
+                "id": 14,
+                "name": "Bureau data",
+                "description": "External credit score and bankruptcy information provided by a bureau."
+            },
+            {
+                "id": 13,
+                "name": "Applicant data",
+                "description": "Information about the applicant including personal information, marital status and household income/expenses."
+            }
+        ],
+        "outputAsInputData": [
+            {
+                "id": 25,
+                "name": "Routing",
+                "description": "How this should this applicant be routed given all available data? Allowed Answers: A value from the explicit list 'Decline', 'Refer for Adjudication', 'Accept without Review'"
+            }
+        ],
+        "outputData": [
+            {
+                "id": 16,
+                "name": "Adjudication",
+                "description": "Should this application that has been referred for adjudication be accepted? Allowed Answers: Yes/No"
+            }
+        ]
+    },
+    {
+        "id": 20,
+        "name": "Application risk score",
+        "description": "The Application Risk Score decision logic invokes the Application risk score model business knowledge model, passing Applicant data.Age as the Age parameter, Applicant data.MaritalStatus as the Marital Status parameter and Applicant data.EmploymentStatus as the Employment Status parameter.",
+        "knowledgeSources": [],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [],
+        "inputData": [
+            {
+                "id": 13,
+                "name": "Applicant data",
+                "description": "Information about the applicant including personal information, marital status and household income/expenses."
+            }
+        ],
+        "outputAsInputData": [],
+        "outputData": [
+            {
+                "id": 17,
+                "name": "Application risk score",
+                "description": "What is the risk score for this applicant? Allowed Answers: A number greater than 70 and less than 150"
+            }
+        ]
+    },
+    {
+        "id": 21,
+        "name": "Bureau call type",
+        "description": "The Bureau call type decision logic invokes the Bureau call type table, passing the output of the Pre-bureau risk category decision as the Pre-Bureau Risk Category parameter.",
+        "knowledgeSources": [],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [],
+        "inputData": [],
+        "outputAsInputData": [
+            {
+                "id": 22,
+                "name": "Pre-bureau risk category",
+                "description": "Which risk category is most appropriate for this applicant given only their application data? Allowed Answers: Value from explicit list 'Decline', 'High Risk', 'Medium Risk', 'Low Risk', 'Very Low Risk'"
+            }
+        ],
+        "outputData": [
+            {
+                "id": 18,
+                "name": "Bureau call type",
+                "description": "How much data should be requested from the credit bureau for this application? Allowed Answers: A value from the explicit list 'Full', 'Mini', 'None'"
+            }
+        ]
+    },
+    {
+        "id": 22,
+        "name": "Eligibility",
+        "description": "The Eligibility decision logic invokes the Eligibility rules business knowledge model, passing Applicant data.Age as the Age parameter, the output of the Pre-bureau risk category decision as the Pre-Bureau Risk Category parameter, and the output of the Pre-bureau affordability decision as the Pre-Bureau Affordability parameter.",
+        "knowledgeSources": [],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [],
+        "inputData": [
+            {
+                "id": 13,
+                "name": "Applicant data",
+                "description": "Information about the applicant including personal information, marital status and household income/expenses."
+            }
+        ],
+        "outputAsInputData": [
+            {
+                "id": 22,
+                "name": "Pre-bureau risk category",
+                "description": "Which risk category is most appropriate for this applicant given only their application data? Allowed Answers: Value from explicit list 'Decline', 'High Risk', 'Medium Risk', 'Low Risk', 'Very Low Risk'"
+            },
+            {
+                "id": 20,
+                "name": "Pre-bureau affordability",
+                "description": "Can the applicant afford the loan they applied for given only their application data? Allowed Answers: Yes/No"
+            }
+        ],
+        "outputData": [
+            {
+                "id": 19,
+                "name": "Eligibility",
+                "description": "Does this applicant appear eligible for the loan they applied for given only their application data? Allowed Answers: Value from the explicit list 'Eligible', 'Not Eligible'"
+            }
+        ]
+    },
+    {
+        "id": 23,
+        "name": "Pre-bureau affordability",
+        "description": "The Pre-bureau affordability decision logic invokes the Affordability calculation business knowledge model, passing Applicant data.Monthly.Income as the Monthly Income parameter, Applicant data.Monthly.Repayments as the Monthly Repayments parameter, Applicant data.Monthly.Expenses as the Monthly Expenses parameter, the output of of the Pre-bureau risk category decision as the Risk Category parameter, and the output of the Required monthly installment decision as the Required Monthly Installment parameter.",
+        "knowledgeSources": [],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [],
+        "inputData": [
+            {
+                "id": 13,
+                "name": "Applicant data",
+                "description": "Information about the applicant including personal information, marital status and household income/expenses."
+            }
+        ],
+        "outputAsInputData": [
+            {
+                "id": 22,
+                "name": "Pre-bureau risk category",
+                "description": "Which risk category is most appropriate for this applicant given only their application data? Allowed Answers: Value from explicit list 'Decline', 'High Risk', 'Medium Risk', 'Low Risk', 'Very Low Risk'"
+            },
+            {
+                "id": 24,
+                "name": "Required monthly installment",
+                "description": "What is the minimum monthly installment payment required for this loan product? Allowed Answers: A dollar amount greater than zero"
+            }
+        ],
+        "outputData": [
+            {
+                "id": 20,
+                "name": "Pre-bureau affordability",
+                "description": "Can the applicant afford the loan they applied for given only their application data? Allowed Answers: Yes/No"
+            }
+        ]
+    },
+    {
+        "id": 24,
+        "name": "Post-bureau affordability",
+        "description": "The Post-bureau affordability decision logic invokes the Affordability calculation business knowledge model, passing Applicant data.Monthly.Income as the Monthly Income parameter, Applicant data.Monthly.Repayments as the Monthly Repayments parameter, Applicant data.Monthly.Expenses as the Monthly Expenses parameter, the output of the Post-bureau risk category decision as the Risk Category parameter, and the output of the Required monthly installment decision as the Required Monthly Installment parameter.",
+        "knowledgeSources": [],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [],
+        "inputData": [
+            {
+                "id": 13,
+                "name": "Applicant data",
+                "description": "Information about the applicant including personal information, marital status and household income/expenses."
+            }
+        ],
+        "outputAsInputData": [
+            {
+                "id": 23,
+                "name": "Post-bureau risk category",
+                "description": "Which risk category is most appropriate for this applicant given all available data? Allowed Answers: A value from the explicit list 'Decline', 'High Risk', 'Medium Risk', 'Low Risk', 'Very Low Risk'"
+            },
+            {
+                "id": 24,
+                "name": "Required monthly installment",
+                "description": "What is the minimum monthly installment payment required for this loan product? Allowed Answers: A dollar amount greater than zero"
+            }
+        ],
+        "outputData": [
+            {
+                "id": 21,
+                "name": "Post-bureau affordability",
+                "description": "Can the applicant afford the loan they applied for given all available data? Allowed Answers: Yes/No"
+            }
+        ]
+    },
+    {
+        "id": 25,
+        "name": "Pre-bureau risk category",
+        "description": "The Pre-Bureau Risk Category decision logic invokes the Pre-bureau risk category table business knowledge model, passing Applicant data.ExistingCustomer as the Existing Customer parameter and the output of the Application risk score decision as the Application Risk Score parameter.",
+        "knowledgeSources": [],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [],
+        "inputData": [
+            {
+                "id": 13,
+                "name": "Applicant data",
+                "description": "Information about the applicant including personal information, marital status and household income/expenses."
+            }
+        ],
+        "outputAsInputData": [
+            {
+                "id": 17,
+                "name": "Application risk score",
+                "description": "What is the risk score for this applicant? Allowed Answers: A number greater than 70 and less than 150"
+            }
+        ],
+        "outputData": [
+            {
+                "id": 22,
+                "name": "Pre-bureau risk category",
+                "description": "Which risk category is most appropriate for this applicant given only their application data? Allowed Answers: Value from explicit list 'Decline', 'High Risk', 'Medium Risk', 'Low Risk', 'Very Low Risk'"
+            }
+        ]
+    },
+    {
+        "id": 26,
+        "name": "Post-bureau risk category",
+        "description": "The Post-bureau risk category decision logic invokes the Post-bureau risk category business knowledge model, passing Applicant data.ExistingCustomer as the Existing Customer parameter, Bureau data.CreditScore as the Credit Score parameter, and the output of the Application risk score decision as the Application Risk Score parameter. Note that if Bureau data is null (due to the THROUGH strategy bypassing the Collect bureau data task) the Credit Score parameter will be null.",
+        "knowledgeSources": [],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [],
+        "inputData": [
+            {
+                "id": 14,
+                "name": "Bureau data",
+                "description": "External credit score and bankruptcy information provided by a bureau."
+            },
+            {
+                "id": 13,
+                "name": "Applicant data",
+                "description": "Information about the applicant including personal information, marital status and household income/expenses."
+            }
+        ],
+        "outputAsInputData": [
+            {
+                "id": 17,
+                "name": "Application risk score",
+                "description": "What is the risk score for this applicant? Allowed Answers: A number greater than 70 and less than 150"
+            }
+        ],
+        "outputData": [
+            {
+                "id": 23,
+                "name": "Post-bureau risk category",
+                "description": "Which risk category is most appropriate for this applicant given all available data? Allowed Answers: A value from the explicit list 'Decline', 'High Risk', 'Medium Risk', 'Low Risk', 'Very Low Risk'"
+            }
+        ]
+    },
+    {
+        "id": 27,
+        "name": "Required monthly installment",
+        "description": "The Required monthly installment decision logic invokes the Installment calculation business knowledge model, passing Requested product.ProductType as the Product Type parameter, Requested product.Rate as the Rate parameter, Requested product.Term as the Term parameter, and Requested product.Amount as the Amount parameter.",
+        "knowledgeSources": [],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [],
+        "inputData": [
+            {
+                "id": 16,
+                "name": "Requested product",
+                "description": "Details of the loan the applicant has applied for."
+            }
+        ],
+        "outputAsInputData": [],
+        "outputData": [
+            {
+                "id": 24,
+                "name": "Required monthly installment",
+                "description": "What is the minimum monthly installment payment required for this loan product? Allowed Answers: A dollar amount greater than zero"
+            }
+        ]
+    },
+    {
+        "id": 28,
+        "name": "Routing",
+        "description": "The Routing decision logic invokes the Routing rules business knowledge model, passing Bureau data. Bankrupt as the Bankrupt parameter, Bureau data. Credit Score as the Credit Score parameter, the output of the Post- bureau risk category decision as the Post-Bureau Risk Category parameter, and the output of the Post-bureau affordability decision as the Post-Bureau Affordability parameter. Note that if Bureau data is null (due to the THROUGH strategy bypassing the Collect bureau data task) the Bankrupt and Credit Score parameters will be null.",
+        "knowledgeSources": [],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [],
+        "inputData": [
+            {
+                "id": 14,
+                "name": "Bureau data",
+                "description": "External credit score and bankruptcy information provided by a bureau."
+            }
+        ],
+        "outputAsInputData": [
+            {
+                "id": 23,
+                "name": "Post-bureau risk category",
+                "description": "Which risk category is most appropriate for this applicant given all available data? Allowed Answers: A value from the explicit list 'Decline', 'High Risk', 'Medium Risk', 'Low Risk', 'Very Low Risk'"
+            },
+            {
+                "id": 21,
+                "name": "Post-bureau affordability",
+                "description": "Can the applicant afford the loan they applied for given all available data? Allowed Answers: Yes/No"
+            }
+        ],
+        "outputData": [
+            {
+                "id": 25,
+                "name": "Routing",
+                "description": "How this should this applicant be routed given all available data? Allowed Answers: A value from the explicit list 'Decline', 'Refer for Adjudication', 'Accept without Review'"
+            }
+        ]
+    },
+    {
+        "id": 29,
+        "name": "Strategy",
+        "description": "The Strategy decision logic defines a complete, unique-hit decision table deriving Strategy from Eligibility and Bureau call type.",
+        "knowledgeSources": [],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [],
+        "inputData": [],
+        "outputAsInputData": [
+            {
+                "id": 18,
+                "name": "Bureau call type",
+                "description": "How much data should be requested from the credit bureau for this application? Allowed Answers: A value from the explicit list 'Full', 'Mini', 'None'"
+            },
+            {
+                "id": 19,
+                "name": "Eligibility",
+                "description": "Does this applicant appear eligible for the loan they applied for given only their application data? Allowed Answers: Value from the explicit list 'Eligible', 'Not Eligible'"
+            }
+        ],
+        "outputData": [
+            {
+                "id": 26,
+                "name": "Strategy",
+                "description": "What is the appropriate handling strategy for this application? Allowed Answers: A value from the explicit list 'Decline','Bureau','Through'"
+            }
+        ]
+    },
+    {
+        "id": 30,
+        "name": "Qualification",
+        "description": "",
+        "knowledgeSources": [],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [],
+        "inputData": [
+            {
+                "id": 22,
+                "name": "Lender Ratings",
+                "description": "a structure of type tLenderRatings"
+            },
+            {
+                "id": 21,
+                "name": "Borrower",
+                "description": "a structure of type tBorrower"
+            },
+            {
+                "id": 18,
+                "name": "Credit Score",
+                "description": "a number from 300 to 850 inclusive"
+            },
+            {
+                "id": 20,
+                "name": "Property",
+                "description": "a structure of type tProperty"
+            },
+            {
+                "id": 23,
+                "name": "Loan Products",
+                "description": ""
+            }
+        ],
+        "outputAsInputData": [
+            {
+                "id": 29,
+                "name": "Loan info table",
+                "description": ""
+            }
+        ],
+        "outputData": [
+            {
+                "id": 27,
+                "name": "Qualification",
+                "description": ""
+            },
+            {
+                "id": 19,
+                "name": "Eligibility",
+                "description": "Does this applicant appear eligible for the loan they applied for given only their application data? Allowed Answers: Value from the explicit list 'Eligible', 'Not Eligible'"
+            }
+        ]
+    },
+    {
+        "id": 31,
+        "name": "Recommended Loan Products",
+        "description": "",
+        "knowledgeSources": [],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [],
+        "inputData": [],
+        "outputAsInputData": [
+            {
+                "id": 27,
+                "name": "Qualification",
+                "description": ""
+            }
+        ],
+        "outputData": [
+            {
+                "id": 28,
+                "name": "Recommended Loan Products",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 32,
+        "name": "Loan info table",
+        "description": "",
+        "knowledgeSources": [],
+        "owners": [],
+        "performanceIndicators": [],
+        "businessKnowledges": [],
+        "inputData": [
+            {
+                "id": 18,
+                "name": "Credit Score",
+                "description": "a number from 300 to 850 inclusive"
+            },
+            {
+                "id": 20,
+                "name": "Property",
+                "description": "a structure of type tProperty"
+            },
+            {
+                "id": 23,
+                "name": "Loan Products",
+                "description": ""
+            },
+            {
+                "id": 19,
+                "name": "Down Payment",
+                "description": "a number"
+            }
+        ],
+        "outputAsInputData": [],
+        "outputData": [
+            {
+                "id": 29,
+                "name": "Loan info table",
+                "description": ""
+            }
+        ]
+    }
+]

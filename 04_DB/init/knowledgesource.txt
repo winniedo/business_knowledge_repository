@@ -1,0 +1,5 @@
+Affordability spreadsheet ### Internal spreadsheet showing the relationship of income, payments, expenses, risk and affordability.
+Credit officer experience  ### The collected wisdom of the credit officers as collected in their best practice wiki.
+Credit risk analytics ### Credit risk scorecard analysis to determine the relevant factors for application risk scoring
+Product specification ### Definitions of the products, their cost structure and eligibility criteria.
+Risk management strategy ### Overall risk management approach for the financial institution including its approach to application risk, credit contingencies and credit risk scoring.

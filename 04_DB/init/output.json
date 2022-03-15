@@ -1,0 +1,61 @@
+[
+    {
+        "name": "Adjudication",
+        "description": "Should this application that has been referred for adjudication be accepted? Allowed Answers: Yes/No"
+    },
+    {
+        "name": "Application risk score",
+        "description": "What is the risk score for this applicant? Allowed Answers: A number greater than 70 and less than 150"
+    },
+    {
+        "name": "Bureau call type",
+        "description": "How much data should be requested from the credit bureau for this application? Allowed Answers: A value from the explicit list 'Full', 'Mini', 'None'"
+    },
+    {
+        "name": "Eligibility",
+        "description": "Does this applicant appear eligible for the loan they applied for given only their application data? Allowed Answers: Value from the explicit list 'Eligible', 'Not Eligible'"
+    },
+    {
+        "name": "Pre-bureau affordability",
+        "description": "Can the applicant afford the loan they applied for given only their application data? Allowed Answers: Yes/No"
+    },
+    {
+        "name": "Post-bureau affordability",
+        "description": "Can the applicant afford the loan they applied for given all available data? Allowed Answers: Yes/No"
+    },
+    {
+        "name": "Pre-bureau risk category",
+        "description": "Which risk category is most appropriate for this applicant given only their application data? Allowed Answers: Value from explicit list 'Decline', 'High Risk', 'Medium Risk', 'Low Risk', 'Very Low Risk'"
+    },
+    {
+        "name": "Post-bureau risk category",
+        "description": "Which risk category is most appropriate for this applicant given all available data? Allowed Answers: A value from the explicit list 'Decline', 'High Risk', 'Medium Risk', 'Low Risk', 'Very Low Risk'"
+    },
+    {
+        "name": "Required monthly installment",
+        "description": "What is the minimum monthly installment payment required for this loan product? Allowed Answers: A dollar amount greater than zero"
+    },
+    {
+        "name": "Routing",
+        "description": "How this should this applicant be routed given all available data? Allowed Answers: A value from the explicit list 'Decline', 'Refer for Adjudication', 'Accept without Review'"
+    },
+    {
+        "name": "Strategy",
+        "description": "What is the appropriate handling strategy for this application? Allowed Answers: A value from the explicit list 'Decline','Bureau','Through'"
+    },
+
+
+    
+    {
+        "name": "Qualification",
+        "description": ""
+    },
+    {
+        "name": "Recommended Loan Products",
+        "description": ""
+    },
+    {
+        "name": "Loan info table",
+        "description": ""
+    }
+]

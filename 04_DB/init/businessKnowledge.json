@@ -1,0 +1,65 @@
+[
+    {
+        "name": "Eligibility rules",
+        "description": "The Eligibility rules decision logic defines a complete, priority-ordered single hit decision table deriving Eligibility from Pre-Bureau Risk Category, Pre-Bureau Affordability and Age."
+    },
+    {
+        "name": "Routing rules",
+        "description": "The Routing Rules decision logic defines a complete, priority-ordered single hit decision table deriving Routing from Post-Bureau Risk Category, Post-Bureau Affordability, Bankrupt and Credit Score."
+    },
+    {
+        "name": "Bureau call type table",
+        "description": "The Bureau call type table decision logic defines a complete, unique-hit decision table deriving Bureau Call Type from Pre-Bureau Risk Category."
+    },
+    {
+        "name": "Credit contingency factor table",
+        "description": "The Credit contingency factor table decision logic defines a complete, unique-hit decision table deriving Credit contingency factor from Risk Category."
+    },
+    {
+        "name": "Affordability calculation",
+        "description": "The Affordability calculation decision logic defines a boxed function deriving Affordability from Monthly Income, Monthly Repayments, Monthly Expenses and Required Monthly Installment. One step in this calculation derives Credit contingency factor by invoking the Credit contingency factor table business."
+    },
+    {
+        "name": "Pre-bureau risk category table",
+        "description": "The Pre-bureau risk category table decision logic defines a complete, unique-hit decision table deriving Pre- bureau risk category from Existing Customer and Application Risk Score."
+    },
+    {
+        "name": "Post-bureau risk category table",
+        "description": "The Post-bureau risk category table decision logic defines a complete, unique-hit decision table deriving Post-Bureau Risk Category from Existing Customer, Application Risk Score and Credit Score."
+    },
+    {
+        "name": "Application risk score model",
+        "description": "The Application risk score model decision logic defines a complete, no-order multiple-hit table with aggregation, deriving Application risk score from Age, Marital Status and Employment Status, as the sum of the Partial scores of all matching rows (this is therefore a predictive scorecard represented as a decision table)."
+    },
+    {
+        "name": "Installment calculation",
+        "description": "The Installment calculation decision logic defines a boxed function deriving monthly installment from Product Type, Rate, Term and Amount."
+    },
+    {
+        "name": "Financial.PMT",
+        "description": "Standard calculation of monthly installment from Rate, Term and Amount."
+    },
+
+
+    
+    {
+        "name": "Format Row",
+        "description": ""
+    },
+    {
+        "name": "Qualification",
+        "description": ""
+    },
+    {
+        "name": "Qualification Parameters",
+        "description": ""
+    },
+    {
+        "name": "Min Credit Score",
+        "description": ""
+    },
+    {
+        "name": "Loan Info Services",
+        "description": ""
+    }
+]

@@ -1,0 +1,5 @@
+Credit officers ### Individuals in the Retail Banking Organization responsible for manual adjudication of loans.
+Product management ### Organization responsible for defining loan and other banking products, how those products are priced, sold and tracked for profitability.
+Credit risk analytics group ### Organization responsible for credit risk models and the use of data to predict credit risk for customers and loan applicants.
+Retail banking ### Overall Organization focused on banking products for consumers.
+Credit risk ### Organization within the bank responsible for defining credit risk strategies and policies and providing tools for managing against these.

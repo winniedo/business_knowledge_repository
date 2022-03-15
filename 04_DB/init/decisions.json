@@ -1,0 +1,61 @@
+[
+    {
+        "name": "Adjudication",
+        "description": "Determine if an application requiring adjudication should be accepted or declined given the available application data and supporting documents."
+    },
+    {
+        "name": "Application risk score",
+        "description": "The Application Risk Score decision logic invokes the Application risk score model business knowledge model, passing Applicant data.Age as the Age parameter, Applicant data.MaritalStatus as the Marital Status parameter and Applicant data.EmploymentStatus as the Employment Status parameter."
+    },
+    {
+        "name": "Bureau call type",
+        "description": "The Bureau call type decision logic invokes the Bureau call type table, passing the output of the Pre-bureau risk category decision as the Pre-Bureau Risk Category parameter."
+    },
+    {
+        "name": "Eligibility",
+        "description": "The Eligibility decision logic invokes the Eligibility rules business knowledge model, passing Applicant data.Age as the Age parameter, the output of the Pre-bureau risk category decision as the Pre-Bureau Risk Category parameter, and the output of the Pre-bureau affordability decision as the Pre-Bureau Affordability parameter."
+    },
+    {
+        "name": "Pre-bureau affordability",
+        "description": "The Pre-bureau affordability decision logic invokes the Affordability calculation business knowledge model, passing Applicant data.Monthly.Income as the Monthly Income parameter, Applicant data.Monthly.Repayments as the Monthly Repayments parameter, Applicant data.Monthly.Expenses as the Monthly Expenses parameter, the output of of the Pre-bureau risk category decision as the Risk Category parameter, and the output of the Required monthly installment decision as the Required Monthly Installment parameter."
+    },
+    {
+        "name": "Post-bureau affordability",
+        "description": "The Post-bureau affordability decision logic invokes the Affordability calculation business knowledge model, passing Applicant data.Monthly.Income as the Monthly Income parameter, Applicant data.Monthly.Repayments as the Monthly Repayments parameter, Applicant data.Monthly.Expenses as the Monthly Expenses parameter, the output of the Post-bureau risk category decision as the Risk Category parameter, and the output of the Required monthly installment decision as the Required Monthly Installment parameter."
+    },
+    {
+        "name": "Pre-bureau risk category",
+        "description": "The Pre-Bureau Risk Category decision logic invokes the Pre-bureau risk category table business knowledge model, passing Applicant data.ExistingCustomer as the Existing Customer parameter and the output of the Application risk score decision as the Application Risk Score parameter."
+    },
+    {
+        "name": "Post-bureau risk category",
+        "description": "The Post-bureau risk category decision logic invokes the Post-bureau risk category business knowledge model, passing Applicant data.ExistingCustomer as the Existing Customer parameter, Bureau data.CreditScore as the Credit Score parameter, and the output of the Application risk score decision as the Application Risk Score parameter. Note that if Bureau data is null (due to the THROUGH strategy bypassing the Collect bureau data task) the Credit Score parameter will be null."
+    },
+    {
+        "name": "Required monthly installment",
+        "description": "The Required monthly installment decision logic invokes the Installment calculation business knowledge model, passing Requested product.ProductType as the Product Type parameter, Requested product.Rate as the Rate parameter, Requested product.Term as the Term parameter, and Requested product.Amount as the Amount parameter."
+    },
+    {
+        "name": "Routing",
+        "description": "The Routing decision logic invokes the Routing rules business knowledge model, passing Bureau data. Bankrupt as the Bankrupt parameter, Bureau data. Credit Score as the Credit Score parameter, the output of the Post- bureau risk category decision as the Post-Bureau Risk Category parameter, and the output of the Post-bureau affordability decision as the Post-Bureau Affordability parameter. Note that if Bureau data is null (due to the THROUGH strategy bypassing the Collect bureau data task) the Bankrupt and Credit Score parameters will be null."
+    },
+    {
+        "name": "Strategy",
+        "description": "The Strategy decision logic defines a complete, unique-hit decision table deriving Strategy from Eligibility and Bureau call type."
+    },
+
+
+    
+    {
+        "name": "Qualification",
+        "description": ""
+    },
+    {
+        "name": "Recommended Loan Products",
+        "description": ""
+    },
+    {
+        "name": "Loan info table",
+        "description": ""
+    }
+]

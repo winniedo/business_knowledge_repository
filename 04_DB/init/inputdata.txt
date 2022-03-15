@@ -1,0 +1,11 @@
+Applicant data ### Information about the applicant including personal information, marital status and household income/expenses.
+Bureau data ### External credit score and bankruptcy information provided by a bureau.
+Loan default data ### Information about historical loan defaults.
+Requested product ### Details of the loan the applicant has applied for.
+Supporting documents ### Documents associated with a loan that are not processed electronically but are available for manual adjudication.
+Credit Score ### a number from 300 to 850 inclusive
+Down Payment ### a number
+Property ### a structure of type tProperty
+Borrower ### a structure of type tBorrower
+Lender Ratings ### a structure of type tLenderRatings
+Loan Products ###  

@@ -819,7 +819,7 @@ public class GraphManagement {
 
         //Create a set of output data Os which contains all output data available in the business knowledge repository, which are semantic similar to o.
         //Extend Is with all input data available in the business knowledge repository, which are semantic similar to an element of the initial Is
-        DISCO disco = DISCO.load("/home/kuosi/dev/enwiki-20130403-word2vec-lm-mwl-lc-sim.denseMatrix");
+        DISCO disco = DISCO.load("/business_knowledge_repository/enwiki-20130403-word2vec-lm-mwl-lc-sim.denseMatrix");
         List<String> semanticSimilarOutputs = new ArrayList<String>();
         List<String> semanticSimilarInputs = new ArrayList<String>();
         List<String> simpleSemanticSimilarOutputs = new ArrayList<String>();

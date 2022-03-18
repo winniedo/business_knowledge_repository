@@ -37,7 +37,7 @@
 			<artifactId>disco</artifactId>
 			<version>3.0</version>
 			<scope>system</scope>
-			<systemPath>/home/kuosi/dev/master_thesis/06_Implementation/01_backend/dmn/lib/disco-3.0.0-all.jar</systemPath>
+			<systemPath>/master_thesis/buiness_knowledge_repository/01_backend/dmn/lib/disco-3.0.0-all.jar</systemPath>
 		</dependency>
 
 		<dependency>

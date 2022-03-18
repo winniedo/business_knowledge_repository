@@ -195,7 +195,7 @@ public class GraphManagement {
             startTime = System.currentTimeMillis();
             String[] command = new String[] {
                     "python3",
-                    "/home/kuosi/dev/master_thesis/06_Implementation/02_boolean_algebra/power_set.py",
+                    "/master_thesis/business_knowledge_repository/02_boolean_algebra/power_set.py",
                     nodeSetStr
             };
             String inputLine = "Y";
@@ -455,7 +455,7 @@ public class GraphManagement {
             startTime = System.currentTimeMillis();
             String[] command = new String[] {
                     "python3",
-                    "/home/kuosi/dev/master_thesis/06_Implementation/02_boolean_algebra/dnf.py",
+                    "/master_thesis/business_knowledge_repository/02_boolean_algebra/dnf.py",
                     expr
             };
             String inputLine = "Y";
@@ -819,7 +819,7 @@ public class GraphManagement {
 
         //Create a set of output data Os which contains all output data available in the business knowledge repository, which are semantic similar to o.
         //Extend Is with all input data available in the business knowledge repository, which are semantic similar to an element of the initial Is
-        DISCO disco = DISCO.load("/business_knowledge_repository/enwiki-20130403-word2vec-lm-mwl-lc-sim.denseMatrix");
+        DISCO disco = DISCO.load("/master_thesis/business_knowledge_repository/enwiki-20130403-word2vec-lm-mwl-lc-sim.denseMatrix");
         List<String> semanticSimilarOutputs = new ArrayList<String>();
         List<String> semanticSimilarInputs = new ArrayList<String>();
         List<String> simpleSemanticSimilarOutputs = new ArrayList<String>();
@@ -878,7 +878,7 @@ public class GraphManagement {
             //Create DNF ang get minimal cut sets / minimal tie sets      
             String[] command = new String[] {
                     "python3",
-                    "/home/kuosi/dev/master_thesis/06_Implementation/02_boolean_algebra/dnf.py",
+                    "/master_thesis/business_knowledge_repository/02_boolean_algebra/dnf.py",
                     expr
             };
             String inputLine = "Y";
